@@ -4,7 +4,6 @@
   <q-img class="logo" src="../../assets/instadev-logo.svg"></q-img>
   <q-img class="q-mr-sm" src="../../assets/curtidas.svg" width="28px"></q-img>
 </div>
-  <h1>oiii</h1>
 </template>
 
 <script>
