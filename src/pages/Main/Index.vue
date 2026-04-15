@@ -50,12 +50,7 @@ export default {
   height: 98px;
   margin-top: 70px;
 }
-.container-bottom {
-  z-index: 6000;
-  position: fixed;
-  bottom: 0;
-  background-color: $background-light;
-}
+
 .container-top{
   z-index: 6000;
   position: fixed;
