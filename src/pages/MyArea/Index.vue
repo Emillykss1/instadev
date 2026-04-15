@@ -1,0 +1,114 @@
+<template>
+  <q-page class="flex">
+   <div class="column q-px-md full-width"> 
+    <q-icon name="las la-bars" size="31px" class="absolute-right q-ma-xl"></q-icon>
+
+    <div class="full-width row items-center justify-center">
+      <q-icon name="fas fa-lock" color="black" size="11px" class="q-mr-xs" />
+      <strong>jacob_w</strong>
+      <q-icon name="fas fa-chevron-down" color="black" size="11px" class="q-ml-xs" />
+    </div>
+
+    <div class="row items-center justify-between full-width">
+      <div class="profile-border-neutral">
+        <q-avatar size="96px" class="avatar-profile">
+          <img class="avatar" src="https://cdn.quasar.dev/img/avatar.png" />
+        </q-avatar>
+      </div>
+
+      <div class="column items-center">
+        <strong>54</strong>
+        <span>Posts</span>
+      </div>
+
+      <div class="column items-center">
+        <strong>834</strong>
+        <span>Followers</span>
+      </div>
+
+      <div class="column items-center">
+        <strong>162</strong>
+        <span>Following</span>
+      </div>
+    </div>
+
+    <div class="column">
+      <strong>Jacob West</strong>
+      <span>
+        Digital goodies designer @pixsellz
+      </span>
+      <span>
+        Everything is designed.
+      </span>
+    </div>
+
+    <q-btn
+      color="white"
+      flat
+      dense
+      class="btn-edit full-width"
+      text-color="black"
+      label="Edit Profile"
+    />
+
+    <div class="row">
+      <div class="column items-center q-mr-md">
+        <div class="story-border-neutral">
+          <q-avatar size="64px" class="avatar-story">
+            <q-icon name="las la-plus"></q-icon>
+          </q-avatar>
+        </div>
+        <span>New</span>
+      </div>
+
+      <div class="column items-center q-mr-md" v-for="item in 3" :key="item">
+        <div class="story-border-neutral">
+          <q-avatar size="64px" class="avatar-story">
+            <img class="avatar" src="https://cdn.quasar.dev/img/avatar.png" />
+          </q-avatar>
+        </div>
+        <span>Friends</span>
+      </div>
+    </div>
+   </div> 
+  </q-page>
+</template>
+
+<script>
+export default {
+  name: 'MyArea'
+};
+</script>
+
+<style lang="scss" scoped>
+.profile-border-neutral,
+.story-border-neutral {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: 50%;
+  background: #dbdbe3;
+}
+
+.q-avatar {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.btn-edit {
+  height: 35px;
+  border-radius: 6px;
+  text-transform: none;
+  border: 2px solid rgba(60, 60, 67, 0.18);
+}
+</style>
