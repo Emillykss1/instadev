@@ -1,13 +1,13 @@
 <template>
   <q-page class="flex">
-    <div class="container-top full-width absolute-top q-mt-lg">
+    <div class="container-top full-width q-pt-lg">
     <TopBarTemp/>
     <q-separetor class="full-width q-mt-sm"/>
     </div>
     <q-scroll-area
     horizontal
     :visible="false"
-    class="scroll-area full-width"
+    class="scroll-area full-width q-px-xm"
     >
       <div class="row no-wrap">
         <div class="full-width" v-for="item in 10" :key="item">
@@ -22,7 +22,8 @@
         </div>
       </div>
     </q-scroll-area>
-    <div class="container-bottom full-width absolute-bottom q-pb-lg">
+    <Posts v-for="item in 10" :key="item"/>
+    <div class="container-bottom full-width q-pb-lg">
       <q-separetor class="full-width q-mb-sm"/>
     <BottomBar/>
     </div>
@@ -32,12 +33,14 @@
 <script>
 import TopBarTemp from 'src/components/TopBarTemp/Index.vue';
 import BottomBar from 'src/components/BottomBar/Index.vue';
+import Posts from 'src/components/Posts/Index.vue';
 
 export default {
   name: 'MainPage',
   components: {
     TopBarTemp,
-    BottomBar
+    BottomBar,
+    Posts,
   },
 };
 </script>
@@ -48,7 +51,16 @@ export default {
   margin-top: 70px;
 }
 .container-bottom {
-  background-color: #FAFAFA;
+  z-index: 6000;
+  position: fixed;
+  bottom: 0;
+  background-color: $background-light;
+}
+.container-top{
+  z-index: 6000;
+  position: fixed;
+  top: 0;
+  background-color: $background-light;
 }
 
 
@@ -65,5 +77,9 @@ export default {
   border: 2px solid #ffffff;
   border-radius: 50%;
   object-fit: cover;
+}
+.bottom-bar {
+  padding-top: 9px;
+  padding-bottom: 7px;
 }
 </style>

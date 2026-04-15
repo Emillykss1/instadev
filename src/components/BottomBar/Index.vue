@@ -1,10 +1,10 @@
 <template>
-<div class="full-width row justify-around">
-  <q-img  src="../../assets/house.svg" width="28px"></q-img>
-  <q-img  src="../../assets/reels.svg" width="28px"></q-img>
-  <q-img  src="../../assets/direct.svg" width="28px"></q-img>
-  <q-img  src="../../assets/pesquisas.svg" width="28px"></q-img>
-  <q-avatar size="28px">
+<div class="bottom-bar full-width row justify-around items-center">
+  <q-img  src="../../assets/house.svg" width="32px"></q-img>
+  <q-img  src="../../assets/reels.svg" width="32px"></q-img>
+  <q-img class="enviar"  src="../../assets/direct.svg" ></q-img>
+  <q-img  src="../../assets/pesquisas.svg" width="34px"></q-img>
+  <q-avatar size="29px">
       <img src="https://cdn.quasar.dev/img/avatar.png" />
   </q-avatar>
 
@@ -20,5 +20,10 @@ export default {
 
 .q-img{
   cursor: pointer;
+}
+
+.enviar{
+    width:27px;
+    height: 27px;
 }
 </style>
