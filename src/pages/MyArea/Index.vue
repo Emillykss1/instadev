@@ -6,8 +6,8 @@
      />
 
     <div
-      class="column q-pt-xl q-px-md full-width page-content"
-      :class="{ 'drawer-open': drawerRight }"
+      class="column q-pt-xl q-pd-md q-px-md full-width bg-grey-2"
+      :class="drawerRight && 'drawer-open'"
     >
       <q-icon
         name="las la-bars"
@@ -80,13 +80,11 @@
         </div>
       </div>
     </div>
-
-    <q-separator class="q-mt-md" />
-
     <div
-      class="full-width page-content"
-      :class="{ 'drawer-open': drawerRight }"
+      class="full-width"
+      :class="drawerRight && 'drawer-open'"
     >
+     <q-separator />
       <q-tabs v-model="tab" class="text-teal" active-color="grey-8">
         <q-tab name="grid">
           <q-img src="../../assets/grid.svg" width="22px" />
