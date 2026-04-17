@@ -18,6 +18,7 @@
       <q-btn
         color="primary"
         label="Log in"
+        :disable="true"
         class="sign-in-button full-width q-mt-lg"
       />
 
