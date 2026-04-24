@@ -18,7 +18,8 @@
           type="submit"
           color="primary"
           label="Log in"
-          :disable="!credencial || !password"
+          :disable="!credencial || !password || loading"
+          :loading="loading"
           class="sign-in-button full-width q-mt-lg"
         />
       </q-form>
@@ -50,22 +51,34 @@
 </template>
 
 <script>
+import { useAuthStore } from 'src/stores/auth-store'
+
 export default {
   name: 'SignIn',
   data() {
     return {
       credencial: '',
       password: '',
+      loading: false,
     }
   },
   methods: {
     async onSubmit() {
-      const api = await this.$axios.post('/auth', {
-        email: this.credencial,
-        password: this.password,
-      })
-      console.log(api);
-      this.$router.push({ path: 'main' });
+      const authStore = useAuthStore()
+      try {
+        this.loading = true
+
+        const response = await authStore.makeLogin({
+          credential: this.credencial,
+          password: this.password,
+        })
+        console.log(response)
+        this.$router.push('/main')
+      } catch (error) {
+        console.error(error)
+      } finally {
+        this.loading = false
+      }
     },
   },
 }

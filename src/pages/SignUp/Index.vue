@@ -47,7 +47,7 @@
       </div>
     </div>
     <div class="full-width column items-center absolute-bottom">
-      <q-separato class="full-width" />
+      <q-separator class="full-width" />
       <div class="q-my-lg">
         <span class="text-black-opacity">Instagram ot Facebook</span>
       </div>
