@@ -59,7 +59,7 @@ export default defineConfig((ctx) => {
 
     framework: {
       config: {},
-      plugins: [],
+      plugins: ['Notify'],
     },
 
 

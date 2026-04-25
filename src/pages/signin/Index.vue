@@ -66,16 +66,20 @@ export default {
     async onSubmit() {
       const authStore = useAuthStore()
       try {
-        this.loading = true
 
-        const response = await authStore.makeLogin({
+       await authStore.makeLogin({
           credential: this.credencial,
           password: this.password,
         })
-        console.log(response)
+        
         this.$router.push('/main')
       } catch (error) {
         console.error(error)
+        this.$q.notify({
+          type: 'negative',
+          message: 'Login ou senha inválidos',
+          position: 'top'
+        })
       } finally {
         this.loading = false
       }
