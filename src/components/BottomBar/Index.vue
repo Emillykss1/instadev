@@ -4,22 +4,36 @@
   <q-img  src="../../assets/reels.svg" width="32px"></q-img>
   <q-img class="enviar"  src="../../assets/direct.svg" ></q-img>
   <q-img  src="../../assets/pesquisas.svg" width="34px"></q-img>
-  <q-avatar size="29px" class="cursor-point" @click="goTo('my-area')">
-      <img src="https://cdn.quasar.dev/img/avatar.png" />
+  <q-avatar size="29px" class="cursor-point" @click="goTo('/my-area')">
+    <img :src="avatarUrl" />
   </q-avatar>
 
 </div>
 </template>
 
 <script>
+import { useUserStore } from 'src/stores/user-store'
+
 export default {
   name: 'BottomBar',
+
+  computed: {
+    user() {
+      const userStore = useUserStore()
+      return userStore.user || {}
+    },
+
+    avatarUrl() {
+      return this.user.avatar || 'https://cdn.quasar.dev/img/avatar.png'
+    },
+  },
+
   methods: {
-    goTo(route){
-      this.$router.push({path: route});
-    }
-  }
-};
+    goTo(route) {
+      this.$router.push({ path: route })
+    },
+  },
+}
 </script>
 <style lang="scss" scoped>
 
