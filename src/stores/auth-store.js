@@ -2,6 +2,11 @@ import { defineStore, acceptHMRUpdate } from 'pinia'
 import { api } from 'src/boot/axios'
 
 export const useAuthStore = defineStore('auth', {
+  state: () => ({
+    token: localStorage.getItem('token') || null,
+    user: JSON.parse(localStorage.getItem('user') || 'null'),
+  }),
+
   actions: {
     async makeLogin(body) {
       const { credential, password } = body
@@ -13,19 +18,29 @@ export const useAuthStore = defineStore('auth', {
         formattedCredential.user_name = credential
       }
 
-      try {
+      
         const { data } = await api.post('/auth', {
           ...formattedCredential,
           password,
         })
+        
+        this.token = data.token
+        this.user = data.user
+
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('user', JSON.stringify(data.user))
 
         return data
-      } catch (error) {
-        console.log(error)
-        throw error
-      }
+      },
+
+      logout(){
+        this.token = null
+        this.user = null
+
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+      },
     },
-  },
 })
 
 if (import.meta.hot) {
