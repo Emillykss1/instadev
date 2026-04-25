@@ -22,9 +22,9 @@
         </div>
       </div>
     </q-scroll-area>
-    <Posts v-for="item in 10" :key="item"/>
+    <Posts :items="posts"/>
     <div class="container-bottom full-width q-pb-lg">
-      <q-separetor class="full-width q-mb-sm"/>
+      <q-separator class="full-width q-mb-sm"/>
     <BottomBar/>
     </div>
   </q-page>
@@ -34,6 +34,7 @@
 import TopBarTemp from 'src/components/TopBarTemp/Index.vue';
 import BottomBar from 'src/components/BottomBar/Index.vue';
 import Posts from 'src/components/Posts/Index.vue';
+import { usePostsStore } from 'src/stores/posts-store'
 
 export default {
   name: 'MainPage',
@@ -42,6 +43,34 @@ export default {
     BottomBar,
     Posts,
   },
+  data() {
+    return {
+      posts: [],
+    };
+  },
+
+
+  async mounted() {
+    await this.loadAllPosts()
+  },
+
+  methods: {
+    async loadAllPosts() {
+      const postsStore = usePostsStore()
+
+      try {
+        const { data } = await postsStore.listAllPosts()
+        this.posts = data
+        console.log(data)
+      } catch (error) {
+        console.error(error)
+        this.$q.notify({
+          type: 'negative',
+          message: 'Falha ao carregar posts',
+        })
+      }
+    }
+  }
 };
 </script>
 

@@ -3,17 +3,16 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-    { path: 'sign-in', component: () => import('pages/Signin/Index.vue'), alias: '' },
-    { path: 'sign-up', component: () => import('pages/SignUp/Index.vue')},
-    { path: 'main', component: () => import('pages/Main/Index.vue') },
-    { path: 'my-area', component: () => import('pages/MyArea/Index.vue') },
-    { path: 'profile', component: () => import('pages/Profile/Index.vue') },
-    { path: 'new-post', component: () => import('pages/NewPost/Index.vue') }
+    { path: '', redirect: { name: 'login' }},
+    { path: 'sign-in', name: 'login', component: () => import('pages/Signin/Index.vue'), alias: '' },
+    { path: 'sign-up', name: 'register', component: () => import('pages/SignUp/Index.vue')},
+    { path: 'main', name: 'main', component: () => import('pages/Main/Index.vue') },
+    { path: 'my-area', name: 'my-area',  component: () => import('pages/MyArea/Index.vue') },
+    { path: 'profile', name: 'profile', component: () => import('pages/Profile/Index.vue') },
+    { path: 'new-post', name: 'new-post', component: () => import('pages/NewPost/Index.vue') }
     ],
   },
 
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: '/:catchAll(.*)*',
     component: () => import('pages/ErrorNotFound.vue'),
