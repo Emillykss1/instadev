@@ -1,14 +1,30 @@
 <template>
   <q-page class="flex flex-center column justify-center q-px-md">
-    <q-icon name="fas fa-chevron-left" size="23px" class="absolute-left q-ma-lg" color="grey" />
+    <q-icon
+      name="fas fa-chevron-left"
+      size="23px"
+      class="absolute-left q-ma-lg"
+      color="grey"
+    />
 
     <div class="full-width column items-center justify-center">
       <q-img class="logo q-mb-lg" src="../../../src/assets/instadev-logo.svg" />
 
       <q-form class="full-width" @submit.prevent="onSubmit">
-        <q-input filled v-model="credencial" label="E-mail ou usuário" class="full-width q-mb-md" />
+        <q-input
+          filled
+          v-model="credencial"
+          label="E-mail ou usuário"
+          class="full-width q-mb-md"
+        />
 
-        <q-input filled v-model="password" label="Password" type="password" class="full-width" />
+        <q-input
+          filled
+          v-model="password"
+          label="Password"
+          type="password"
+          class="full-width"
+        />
 
         <div class="column items-end full-width">
           <a class="q-mt-md link" href="">Forgot password?</a>
@@ -55,6 +71,7 @@ import { useAuthStore } from 'src/stores/auth-store'
 
 export default {
   name: 'SignIn',
+
   data() {
     return {
       credencial: '',
@@ -62,23 +79,26 @@ export default {
       loading: false,
     }
   },
+
   methods: {
     async onSubmit() {
       const authStore = useAuthStore()
-      try {
 
-       await authStore.makeLogin({
+      try {
+        this.loading = true
+
+        await authStore.makeLogin({
           credential: this.credencial,
           password: this.password,
         })
-        
+
         this.$router.push('/main')
       } catch (error) {
         console.error(error)
         this.$q.notify({
           type: 'negative',
           message: 'Login ou senha inválidos',
-          position: 'top'
+          position: 'top',
         })
       } finally {
         this.loading = false
@@ -93,19 +113,23 @@ export default {
   height: 49px;
   width: 182px;
 }
+
 .sign-in-button {
   height: 44px;
   border-radius: 5px;
   background-color: $instablue;
   opacity: 60%;
 }
+
 .facebook-icon {
   height: 17px;
   width: 17px;
 }
+
 .separator {
   width: 350%;
 }
+
 .seta {
   height: 17px;
   width: 17px;
