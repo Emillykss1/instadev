@@ -41,7 +41,10 @@
       </q-form>
 
       <div class="flex full-width row items-center justify-center q-mt-xl">
-        <q-img class="facebook-icon" src="../../../src/assets/facebook-logo.svg" />
+        <q-img
+          class="facebook-icon"
+          src="../../../src/assets/facebook-logo.svg"
+        />
         <a class="link q-ml-xs" href="">Log in with Facebook</a>
       </div>
 
@@ -53,7 +56,7 @@
 
       <div class="full-width row items-center justify-center">
         <span class="text-black-opacity">Don’t have an account?</span>
-        <a class="q-ml-xs link" href="">Sign up.</a>
+        <a class="q-ml-xs link" @click="goTo('/sign-up')">Sign up.</a>
       </div>
     </div>
 
@@ -103,6 +106,10 @@ export default {
       } finally {
         this.loading = false
       }
+    },
+
+    goTo(route) {
+      this.$router.push({ path: route })
     },
   },
 }

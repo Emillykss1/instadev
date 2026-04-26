@@ -8,6 +8,10 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
+      async makeRegister(body) {
+      const { data } = await api.post('/user', body)
+      return data
+    },
     async makeLogin(body) {
       const { credential, password } = body
       const formattedCredential = {}
