@@ -27,7 +27,7 @@
           <q-avatar size="96px" class="avatar-profile">
             <img
               class="avatar"
-              :src="user.avatar || 'https://cdn.quasar.dev/img/avatar.png'"
+              :src="user.avatar || 'https://www.shutterstock.com/image-vector/blank-avatar-photo-placeholder-flat-600nw-1151124605.jpg'"
             />
           </q-avatar>
         </div>
