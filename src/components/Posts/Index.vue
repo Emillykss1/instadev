@@ -4,7 +4,12 @@
       <div class="row justify-between items-center full-width">
         <div class="row items-center">
           <q-avatar size="28px" class="q-mx-md">
-            <img src="https://cdn.quasar.dev/img/avatar.png" />
+            <img
+              :src="
+                String(item.user.id) === String(userData.id)
+                  ? (userData.avatar || 'https://www.shutterstock.com/image-vector/blank-avatar-photo-placeholder-flat-600nw-1151124605.jpg')
+                  : 'https://cdn.quasar.dev/img/avatar.png'"
+            />
           </q-avatar>
 
           <div class="column">
@@ -85,7 +90,9 @@
 
       <div class="row items-center q-mb-xs" v-if="likesOf(item) > 0">
         <q-avatar size="17px" class="q-ml-sm q-mr-xs">
-          <img src="https://cdn.quasar.dev/img/avatar.png" />
+          <img
+            :src="userData.avatar || 'https://www.shutterstock.com/image-vector/blank-avatar-photo-placeholder-flat-600nw-1151124605.jpg'"
+          />
         </q-avatar>
         Liked by <strong>{{ userData.user_name }}</strong> and
         <strong>{{ likesOf(item) }} others</strong>
