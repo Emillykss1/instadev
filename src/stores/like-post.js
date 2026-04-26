@@ -11,7 +11,7 @@ export const useMyPostsStore = defineStore('my-posts', {
     async AddLikeInPost(postId) {
       const authStore = useAuthStore()
 
-      const { data } = await api.get(`/posts/add-like/${postId}`, {
+      const { data } = await api.put(`/posts/add-like/${postId}`, {
         headers: {
           Authorization: `Bearer ${authStore.token}`,
         },
