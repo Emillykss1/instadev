@@ -6,11 +6,22 @@
       <q-btn flat color="primary" label="Done" @click="saveProfile" />
     </div>
 
-    <div class="full-width column items-center justify-center q-py-md">
-      <q-avatar size="96px">
-        <img :src="user.avatar || 'https://www.shutterstock.com/image-vector/blank-avatar-photo-placeholder-flat-600nw-1151124605.jpg'" />
-      </q-avatar>
-      <q-btn flat color="primary" label="Change Profile Photo" />
+        <div class="full-width column items-center justify-center q-py-md">
+          <q-avatar size="96px">
+            <img :src="previewImage 
+            || user.avatar || 
+            'https://www.shutterstock.com/image-vector/blank-avatar-photo-placeholder-flat-600nw-1151124605.jpg'" />
+          </q-avatar>
+
+          <input
+            ref="fileInput"
+            type="file"
+            accept="image/*"
+            class="hidden"
+            @change="handleFileChange"
+          />
+
+          <q-btn flat color="primary" label="Change Profile Photo" @click="openFilePicker" />
     </div>
 
     <div class="full-width column q-px-sm">
@@ -63,6 +74,7 @@
 <script>
 import { useUpdateProfileStore } from 'src/stores/update-profile'
 import { useUserStore } from 'src/stores/user-store'
+import { useUploadFileStore } from 'src/stores/upload-file'
 
 export default {
   name: 'ProfilePage',
@@ -77,6 +89,9 @@ export default {
       phone: '',
       gender: '',
       user: {},
+      selectedFile: null,
+      previewImage: '',
+      uploadedAvatar: '',
     }
   },
 
@@ -87,6 +102,19 @@ export default {
   methods: {
     goTo(route) {
       this.$router.push({ path: route })
+    },
+
+    openFilePicker() {
+      this.$refs.fileInput.click()
+    },
+
+    handleFileChange(event) {
+      const file = event.target.files[0]
+
+      if (!file) return
+
+      this.selectedFile = file
+      this.previewImage = URL.createObjectURL(file)
     },
 
     async loadProfileData() {
@@ -105,43 +133,64 @@ export default {
       this.email = this.user.email || ''
       this.phone = this.user.phone || ''
       this.gender = this.user.gender || ''
+      this.uploadedAvatar = this.user.avatar || ''
     },
 
     async saveProfile() {
-      try {
-        const updateProfileStore = useUpdateProfileStore()
+  try {
+    const updateProfileStore = useUpdateProfileStore()
 
-        const user = await updateProfileStore.updateUserProfile({
-          name: this.name,
-          website: this.website,
-          bio: this.bio,
-          phone: this.phone,
-          gender: this.gender,
-        })
+    if (this.selectedFile) {
+      const uploadFileStore = useUploadFileStore()
+      const formData = new FormData()
+      formData.append('image', this.selectedFile)
 
-        this.user = user
+      const uploadResponse = await uploadFileStore.uploadFile(formData)
 
-        this.$q.notify({
-          type: 'positive',
-          message: 'Perfil atualizado com sucesso',
-          position: 'top',
-        })
+      this.uploadedAvatar =
+        uploadResponse.url ||
+        uploadResponse.image ||
+        uploadResponse.data?.url ||
+        ''
+    }
 
-        this.$router.push('/my-area')
-      } catch (error) {
-        console.error(error)
-        this.$q.notify({
-          type: 'negative',
-          message: 'Falha ao atualizar perfil',
-          position: 'top',
-        })
-      }
-    },
+    const user = await updateProfileStore.updateUserProfile({
+      name: this.name,
+      user_name: this.username,
+      email: this.email,
+      website: this.website,
+      bio: this.bio,
+      phone: this.phone,
+      gender: this.gender,
+      avatar: this.uploadedAvatar,
+    })
+
+    this.user = user
+
+    this.$q.notify({
+      type: 'positive',
+      message: 'Perfil atualizado com sucesso',
+      position: 'top',
+    })
+
+    this.$router.push('/my-area')
+  } catch (error) {
+    console.error(error)
+    this.$q.notify({
+      type: 'negative',
+      message: 'Falha ao atualizar perfil',
+      position: 'top',
+    })
+  }
+},
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.hidden {
+  display: none;
+}
 .container-input {
   font-size: 15px;
 
