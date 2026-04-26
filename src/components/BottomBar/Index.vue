@@ -24,7 +24,7 @@ export default {
     },
 
     avatarUrl() {
-      return this.user.avatar || 'https://cdn.quasar.dev/img/avatar.png'
+      return this.user.avatar || 'https://www.shutterstock.com/image-vector/blank-avatar-photo-placeholder-flat-600nw-1151124605.jpg'
     },
   },
 
