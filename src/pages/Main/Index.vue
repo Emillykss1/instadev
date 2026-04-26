@@ -24,7 +24,7 @@
       </div>
     </q-scroll-area>
 
-    <Posts :items="posts" />
+    <Posts :items="posts" @reload-posts="loadAllPosts" />
 
     <div class="container-bottom full-width q-pb-lg">
       <q-separator class="full-width q-mb-sm" />
